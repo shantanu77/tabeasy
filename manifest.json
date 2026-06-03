@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "TabsEasy",
+  "description": "Search, switch, close, and deduplicate open tabs across Chrome and Edge windows.",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "TabsEasy",
+    "default_popup": "search.html"
+  },
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "commands": {
+    "open-tab-search": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Open TabsEasy search"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}

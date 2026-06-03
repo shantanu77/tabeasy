@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TabsEasy</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="toolbar">
+        <div class="brand">
+          <span class="logo-mark" aria-hidden="true">T</span>
+          <h1>TabsEasy</h1>
+        </div>
+        <button id="refreshButton" class="icon-button" type="button" title="Refresh tabs" aria-label="Refresh tabs">
+          <span aria-hidden="true">R</span>
+        </button>
+      </header>
+
+      <section class="search-panel" aria-label="Tab search">
+        <input
+          id="searchInput"
+          class="search-input"
+          type="search"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Search tab titles"
+          aria-label="Search tab titles"
+        >
+        <div class="meta-row">
+          <p id="statusText" class="status" aria-live="polite">Type at least 2 characters.</p>
+          <div class="actions">
+            <button id="keepOneButton" type="button" disabled>Keep one each</button>
+            <button id="closeMatchingButton" class="danger" type="button" disabled>Close matching</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="results" role="listbox" aria-label="Matching tabs" tabindex="-1"></section>
+    </main>
+
+    <dialog id="confirmDialog">
+      <form method="dialog" class="dialog-card">
+        <h2 id="confirmTitle">Confirm action</h2>
+        <p id="confirmMessage"></p>
+        <label class="check-row">
+          <input id="includePinnedCheck" type="checkbox">
+          Include pinned tabs
+        </label>
+        <div class="dialog-actions">
+          <button id="cancelConfirmButton" value="cancel" type="submit">Cancel</button>
+          <button id="confirmActionButton" class="danger" value="confirm" type="submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dedupeDialog">
+      <form method="dialog" class="dialog-card wide">
+        <h2>Keep one each</h2>
+        <p id="dedupeMessage"></p>
+        <div id="dedupeGroups" class="dedupe-groups"></div>
+        <label class="check-row">
+          <input id="dedupeIncludePinnedCheck" type="checkbox">
+          Include pinned tabs
+        </label>
+        <div class="dialog-actions">
+          <button value="cancel" type="submit">Cancel</button>
+          <button id="confirmDedupeButton" class="danger" value="confirm" type="submit">Close duplicates</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="search.js"></script>
+  </body>
+</html>
