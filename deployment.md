@@ -32,13 +32,50 @@ TabsEasy is a Manifest V3 Chromium extension. It can be installed unpacked in Go
 
 1. Make sure the extension loads without errors as an unpacked extension.
 2. Bump the `version` field in `manifest.json`.
-3. Create a zip archive containing the extension files:
+3. Create a zip archive from the committed source tree:
 
    ```bash
-   zip -r tabseasy.zip manifest.json service-worker.js search.html search.js styles.css LICENSE spec.md deployment.md
+   git archive --format=zip -o tabseasy.zip HEAD
    ```
 
 4. Upload the zip to the Chrome Web Store Developer Dashboard or Microsoft Partner Center.
+
+## Local Validation
+
+Run these checks before loading or packaging:
+
+```bash
+node --check search.js
+node --check service-worker.js
+node -e "JSON.parse(require('fs').readFileSync('manifest.json','utf8')); console.log('manifest ok')"
+git archive --format=zip -o tabseasy.zip HEAD
+```
+
+## Manual Test Checklist
+
+Use a fresh browser window with several tabs open.
+
+1. Load the extension unpacked from the `tabseasy` directory.
+2. Confirm there are no red error messages on the extension card.
+3. Open several test tabs with recognizable titles, for example GitHub, Gmail, Google Docs, and two copies of the same page.
+4. Press `Ctrl+Shift+F`.
+5. Type one character and confirm no results appear.
+6. Type two or more characters from a known tab title and confirm matching tabs appear.
+7. Use `ArrowDown` and `ArrowUp` to move through results.
+8. Press `Enter` and confirm the selected tab becomes active.
+9. Reopen TabsEasy and search for a title shared by multiple tabs.
+10. Click `Close matching`, cancel the confirmation, and confirm no tabs close.
+11. Click `Close matching` again, confirm, and verify only matching unpinned tabs close.
+12. Open duplicate tabs, search for their shared title, click `Keep one each`, choose the tab to keep, confirm, and verify duplicates close.
+13. Pin one matching tab and verify it is skipped unless `Include pinned tabs` is checked.
+14. Repeat the shortcut and basic search flow in both Chrome and Edge.
+
+## Troubleshooting
+
+- If `Ctrl+Shift+F` does not open TabsEasy, open `chrome://extensions/shortcuts` or `edge://extensions/shortcuts` and assign the command manually.
+- If no tabs appear, reload the extension from the extensions page and check for errors on the extension card.
+- If bulk close skips tabs, confirm whether those tabs are pinned.
+- If the popup closes too quickly while testing from the toolbar icon, use the keyboard shortcut to open the dedicated search window.
 
 ## Required Permissions
 
