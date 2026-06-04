@@ -23,7 +23,7 @@ TabsEasy is a Manifest V3 Chromium extension. It can be installed unpacked in Go
 ## Use
 
 1. Press `Ctrl+Shift+F`.
-2. Type at least two characters from a tab title.
+2. Type at least two characters from a tab title or URL.
 3. Press `Enter` to open the selected tab, or click a result.
 4. Use `Close matching` to close all matching tabs after confirmation.
 5. Use `Keep one each` to review duplicate groups and close duplicate tabs after confirmation.
@@ -57,18 +57,19 @@ Use a fresh browser window with several tabs open.
 
 1. Load the extension unpacked from the `tabseasy` directory.
 2. Confirm there are no red error messages on the extension card.
-3. Open several test tabs with recognizable titles, for example GitHub, Gmail, Google Docs, and two copies of the same page.
+3. Open several test tabs with recognizable titles and URLs, for example GitHub, Gmail, Google Docs, and two copies of the same page.
 4. Press `Ctrl+Shift+F`.
 5. Type one character and confirm no results appear.
 6. Type two or more characters from a known tab title and confirm matching tabs appear.
-7. Use `ArrowDown` and `ArrowUp` to move through results.
-8. Press `Enter` and confirm the selected tab becomes active.
-9. Reopen TabsEasy and search for a title shared by multiple tabs.
-10. Click `Close matching`, cancel the confirmation, and confirm no tabs close.
-11. Click `Close matching` again, confirm, and verify only matching unpinned tabs close.
-12. Open duplicate tabs, search for their shared title, click `Keep one each`, choose the tab to keep, confirm, and verify duplicates close.
-13. Pin one matching tab and verify it is skipped unless `Include pinned tabs` is checked.
-14. Repeat the shortcut and basic search flow in both Chrome and Edge.
+7. Type two or more characters from a known tab URL or domain and confirm matching tabs appear.
+8. Use `ArrowDown` and `ArrowUp` to move through results.
+9. Press `Enter` and confirm the selected tab becomes active.
+10. Reopen TabsEasy and search for a title shared by multiple tabs.
+11. Click `Close matching`, cancel the confirmation, and confirm no tabs close.
+12. Click `Close matching` again, confirm, and verify only matching unpinned tabs close.
+13. Open duplicate tabs, search for their shared title, click `Keep one each`, choose the tab to keep, confirm, and verify duplicates close.
+14. Pin one matching tab and verify it is skipped unless `Include pinned tabs` is checked.
+15. Repeat the shortcut and basic search flow in both Chrome and Edge.
 
 ## Troubleshooting
 

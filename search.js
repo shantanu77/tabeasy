@@ -74,12 +74,12 @@ function render() {
     elements.closeMatchingButton.disabled = true;
     elements.keepOneButton.disabled = true;
     setStatus("Type at least 2 characters.");
-    renderEmpty("Search all open tab titles across browser windows.");
+    renderEmpty("Search all open tab titles and URLs across browser windows.");
     return;
   }
 
   state.matches = state.allTabs
-    .filter((tab) => tab.title.toLocaleLowerCase().includes(query))
+    .filter((tab) => tabMatchesQuery(tab, query))
     .sort(sortTabs);
 
   state.duplicateGroups = findDuplicateGroups(state.matches);
@@ -90,7 +90,7 @@ function render() {
 
   if (state.matches.length === 0) {
     setStatus("No matching tabs.");
-    renderEmpty("No tab titles contain this search.");
+    renderEmpty("No tab titles or URLs contain this search.");
     return;
   }
 
@@ -341,6 +341,14 @@ function sortKeepCandidate(a, b) {
 
 function normalizeQuery(value) {
   return value.trim().toLocaleLowerCase();
+}
+
+function tabMatchesQuery(tab, query) {
+  return [
+    tab.title,
+    tab.url,
+    tab.host
+  ].some((value) => (value || "").toLocaleLowerCase().includes(query));
 }
 
 function normalizeTitle(title) {

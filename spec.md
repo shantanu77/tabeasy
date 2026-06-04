@@ -2,14 +2,14 @@
 
 ## Overview
 
-Build a Chromium browser extension for Microsoft Edge and Google Chrome that lets users search across all open tabs in all open browser windows. The user presses a keyboard shortcut, types at least two characters, and sees matching tabs whose titles contain that text. From the results, the user can switch to a tab, close matching tabs, or use a deduplication summary to keep one tab from each group of similar tabs.
+Build a Chromium browser extension for Microsoft Edge and Google Chrome that lets users search across all open tabs in all open browser windows. The user presses a keyboard shortcut, types at least two characters, and sees matching tabs whose titles or URLs contain that text. From the results, the user can switch to a tab, close matching tabs, or use a deduplication summary to keep one tab from each group of similar tabs.
 
 Working name: **TabsEasy**
 
 ## Goals
 
 - Search open tabs across every browser window from a single keyboard shortcut.
-- Match user input against tab titles quickly and predictably.
+- Match user input against tab titles and URLs quickly and predictably.
 - Let users switch to any matching tab.
 - Let users close all matching tabs after confirmation.
 - Help users reduce duplicate or near-duplicate tabs by grouping similar results and keeping one representative tab.
@@ -31,8 +31,8 @@ Working name: **TabsEasy**
 
 ## User Stories
 
-- As a user with many tabs open, I can press `Ctrl+Shift+F` and search tab titles without leaving my current browser context.
-- As a user, I can type two or more characters and immediately see all tabs whose titles contain that sequence.
+- As a user with many tabs open, I can press `Ctrl+Shift+F` and search tab titles and URLs without leaving my current browser context.
+- As a user, I can type two or more characters and immediately see all tabs whose titles or URLs contain that sequence.
 - As a user, I can select a result and jump directly to that tab and its window.
 - As a user, I can close all tabs matching my current search after a clear confirmation.
 - As a user, I can review duplicate-like tabs and keep one tab from each group while closing the others.
@@ -53,7 +53,7 @@ Working name: **TabsEasy**
 ## Search Behavior
 
 - Search source: all open tabs in all normal browser windows.
-- Match field: tab title.
+- Match fields: tab title, full URL, and URL host.
 - Matching rule: case-insensitive substring match.
 - Minimum query length: 2 characters after trimming leading and trailing whitespace.
 - Empty and one-character queries show an idle state instead of results.
@@ -326,7 +326,7 @@ Settings can be implemented after the core workflow if needed.
 - Pressing `Ctrl+Shift+F` opens the search UI in Chrome.
 - Pressing `Ctrl+Shift+F` opens the search UI in Edge.
 - Typing fewer than two characters does not show tab matches.
-- Typing two or more characters shows every open tab whose title contains that string, case-insensitively.
+- Typing two or more characters shows every open tab whose title or URL contains that string, case-insensitively.
 - Search covers tabs across all open normal browser windows.
 - Selecting a result focuses the correct window and activates the correct tab.
 - `Close matching` asks for confirmation and then closes matching tabs.
@@ -357,7 +357,7 @@ Manual test cases:
 
 Automated tests, where practical:
 
-- Unit tests for title matching.
+- Unit tests for title and URL matching.
 - Unit tests for title normalization.
 - Unit tests for duplicate grouping.
 - Unit tests for keep-candidate selection.
@@ -367,7 +367,7 @@ Automated tests, where practical:
 
 1. Create Manifest V3 extension skeleton with command registration.
 2. Implement keyboard command and search window opening.
-3. Implement tab querying and title search.
+3. Implement tab querying and title/URL search.
 4. Implement result list and keyboard navigation.
 5. Implement tab activation.
 6. Implement close matching with confirmation.
@@ -378,7 +378,7 @@ Automated tests, where practical:
 
 ## Open Questions
 
-- Should the search also match URL host/path, or only tab title as specified?
+- Should title matches rank above URL-only matches?
 - Should the default shortcut be changed if `Ctrl+Shift+F` conflicts too often with browser or web-app shortcuts?
 - Should duplicate grouping be strict-only for v1, with balanced matching deferred?
 - Should the extension remember the previous query when reopened?
